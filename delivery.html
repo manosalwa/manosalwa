@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mano SALWA | Delivery</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="ICON" href="images/log.webp">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <div id="hu">
+    <img src="images/log.webp" class="logo">
+
+    <div class="menu-toggle" id="menuToggle">
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav id="navMenu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="hume">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="delivery.html" class="hume">Delivery</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="delivery">
+  <div class="delivery-wrap">
+
+    <h2>Home Delivery</h2>
+    <p>Korangi area ke liye fast delivery available hai</p>
+
+    <div class="delivery-grid">
+
+      <div class="delivery-box">
+        <i class="fa-solid fa-motorcycle"></i>
+        <h4>Fast Delivery</h4>
+        <p>30 to 45 minutes main order pohanch jata hai</p>
+      </div>
+
+      <div class="delivery-box">
+        <i class="fa-solid fa-location-dot"></i>
+        <h4>Delivery Area</h4>
+        <p>Korangi, Landhi, Shah Faisal Colony</p>
+      </div>
+
+      <div class="delivery-box">
+        <i class="fa-solid fa-money-bill"></i>
+        <h4>Payment</h4>
+        <p>Cash on delivery available</p>
+      </div>
+
+    </div>
+
+    <div class="order-now">
+      <a href="https://wa.me/923132576885" target="_blank">
+        Order on WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer class="foot">
+  <p>© 2025 Mano SALWA. All rights reserved.</p>
+</footer>
+
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  menuToggle.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+  });
+</script>
+
+</body>
+</html>

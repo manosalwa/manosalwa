@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Billing</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+
+
+  <link rel="icon" href="../images/log.webp">
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MAIN CONTAINER */
+.billing-container,
+.checkout-container {
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* HEADING */
+.billing-container h2,
+.checkout-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #500c0c;
+}
+
+/* INPUTS */
+input,
+textarea {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+}
+
+textarea {
+  resize: none;
+  height: 110px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #500c0c;
+}
+
+/* ERROR */
+.error {
+  font-size: 13px;
+  color: red;
+  margin-top: 4px;
+}
+
+/* SUMMARY */
+.summary {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.summary p {
+  font-size: 15px;
+  margin: 6px 0;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border: none;
+  border-radius: 25px;
+  background: #500c0c;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .billing-container,
+  .checkout-container {
+    margin: 20px;
+    padding: 22px;
+  }
+
+  .summary p {
+    font-size: 14px;
+  }
+}
+  </style>
+</head>
+<body>
+
+<div class="billing-container">
+  <h2>Billing Details</h2>
+
+  <form id="billingForm">
+    <input type="text" id="name" placeholder="Full Name">
+    <div class="error" id="nameError"></div>
+
+    <input type="email" id="email" placeholder="Email">
+    <div class="error" id="emailError"></div>
+
+    <input type="text" id="phone" placeholder="Phone Number">
+    <div class="error" id="phoneError"></div>
+
+    <input type="text" id="address" placeholder="Use my current location" readonly>
+
+<button type="button" onclick="useCurrentLocation()">
+  Use my current location
+</button>
+
+<div id="map" style="height:300px;margin-top:12px;border-radius:10px;"></div>
+
+
+    <div class="error" id="addressError"></div>
+
+    <button type="submit">Proceed to Payment</button>
+  </form>
+</div>
+
+<script>
+document.getElementById("billingForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // stop form submit
+
+  // values
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const address = document.getElementById("address").value.trim();
+
+  // errors reset
+  document.querySelectorAll(".error").forEach(el => el.innerText = "");
+
+  let isValid = true;
+
+  // Name validation (letters only)
+  if (name === "" || !/^[A-Za-z\s]+$/.test(name)) {
+    document.getElementById("nameError").innerText =
+      "Name sirf letters mein hona chahiye";
+    isValid = false;
+  }
+
+  // Email validation
+  if (email === "" || !/^\S+@\S+\.\S+$/.test(email)) {
+    document.getElementById("emailError").innerText =
+      "Valid email enter karein";
+    isValid = false;
+  }
+
+  // Phone validation (Pakistan style)
+  if (!/^[0-9]{11}$/.test(phone)) {
+    document.getElementById("phoneError").innerText =
+      "Phone number 11 digits ka hona chahiye (03XXXXXXXXX)";
+    isValid = false;
+  }
+
+  // Address validation
+  if (address.length < 10) {
+    document.getElementById("addressError").innerText =
+      "Address kam az kam 10 characters ka hona chahiye";
+    isValid = false;
+  }
+
+  // Final check
+ if (isValid) {
+  localStorage.setItem("name", name);
+  localStorage.setItem("email", email);
+  localStorage.setItem("phone", phone);
+  localStorage.setItem("address", address);
+
+  window.location.href = "checkout.html";
+}
+
+});
+</script>
+<script>
+let map;
+let marker;
+
+function useCurrentLocation() {
+  if (!navigator.geolocation) {
+    alert("Location support nahi karta");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      if (!map) {
+        map = L.map("map").setView([lat, lng], 16);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19
+        }).addTo(map);
+
+        marker = L.marker([lat, lng]).addTo(map);
+      } else {
+        map.setView([lat, lng], 16);
+        marker.setLatLng([lat, lng]);
+      }
+
+      fetchAddress(lat, lng);
+    },
+    function () {
+      alert("Browser se location allow karo");
+    }
+  );
+}
+
+function fetchAddress(lat, lng) {
+  fetch(
+    "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+      lat +
+      "&lon=" +
+      lng
+  )
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("address").value = data.display_name;
+      localStorage.setItem("address", data.display_name);
+    })
+    .catch(() => {
+      document.getElementById("address").value =
+        "Address load nahi ho saka";
+    });
+}
+</script>
+
+
+
+</body>
+</html>

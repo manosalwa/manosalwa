@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <title>Man-O-Salwa Menu</title>
+  <link rel="icon" href="images/log.webp">
+  <style>
+    /* RESET */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* FULL HEIGHT FIX */
+    #navMenu ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+      margin-right: 29px;
+    }
+
+    #navMenu ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    /* HAMBURGER */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 24px;
+      height: 3px;
+      background: rgb(233, 230, 230);
+      margin: 4px 0;
+      border-radius: 4px;
+    }
+
+    /* =====================
+   MOBILE NAVBAR
+===================== */
+   @media (max-width: 768px) {
+
+  .menu-toggle {
+    display: flex;
+    margin-right: 0;
+  }
+
+  #navMenu {
+    display: none;          /* 👈 sab se important */
+    position: absolute;
+    top: 62px;
+    right: 20px;
+    background: #000;
+    width: 200px;
+    border-radius: 8px;
+  }
+
+  #navMenu.active {
+    display: block;
+  }
+
+  #navMenu ul {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px 0;
+    gap: 15px;
+  }
+}
+
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+
+    body {
+      background-image: url("images/menu.webp");
+      background-repeat: repeat y;
+      /* 👈 KEY LINE */
+      background-size: 100% auto;
+      /* full width, natural height */
+      background-position: top center;
+      background-color: #2b0000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+
+    /* Mobile viewport fix */
+    @supports (height: 100svh) {
+      body {
+        min-height: 100svh;
+      }
+      .cart-icon{
+        margin-left: -65px;
+        float: left;
+    }
+    }
+    .cart-icon{
+      margin-left: 3px;
+    }
+    /* HEADER */
+    header {
+      padding: 15px 20px;
+    }
+
+    .logo-nav-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 1000;
+    }
+
+    /* LOGO */
+    .logo-nav-container .logo {
+      width: 60px;
+    }
+
+    /* MENU */
+    .menu {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .menu-title {
+      text-align: center;
+      font-size: 42px;
+      color: #ffcc00;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    h2 {
+      color: #ffcc00;
+      border-bottom: 1px solid #ffcc00;
+      margin: 20px 0 10px;
+      padding-bottom: 5px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 6px 0;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .price-btn {
+      background: #ff6600;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .price-btn:hover {
+      background: #ffaa00;
+    }
+
+    /* MOBILE */
+    @media(max-width:900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-title {
+        font-size: 32px;
+      }
+    }
+
+    /* FOOTER */
+    footer {
+      display: block;
+      text-align: -webkit-center;
+      padding: 20px;
+      font-size: 15px;
+    }
+
+    .menu-item {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      backdrop-filter: blur(6px);
+      transition: all .3s ease;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .menu-left h4 {
+      margin: 0;
+      font-size: 16px;
+      color: #ffcc00;
+    }
+
+    .price-btn {
+      background: linear-gradient(135deg, #ff6600, #ff9900);
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .grid h2 {
+      grid-column: 1 / -1;
+      color: #ffcc00;
+      border-bottom: 1px solid #ffcc00;
+      padding-bottom: 6px;
+      margin: 30px 0 15px;
+    }
+
+    .menu-item {
+      grid-column: 1 / -1;
+    }
+    .nav-actions{
+      margin-left: 60%;
+    }
+  </style>
+</head>
+
+<body oncontextmenu="return false;">
+
+
+  <header>
+    <div class="logo-nav-container">
+
+      <img src="images/log.webp" alt="Mano SALWA Logo" class="logo">
+
+      
+        <div class="cart-icon" onclick="openCart()">
+          <i class="fa-solid fa-cart-arrow-down"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </div>
+        <div class="nav-actions">
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <nav id="navMenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+  </header>
+
+  <div class="menu">
+    <div class="menu-title">MENU</div>
+
+    <div class="grid">
+      <h2>Broast</h2>
+      <div class="menu-item ">
+        <div class="menu-left">
+          <h4>Chest Broast</h4>
+        </div>
+        <button class="price-btn" onclick="addToCart('Chest Broast',220)">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Masala Chest Broast</h4>
+      </div>
+      <button class="price-btn" onclick="addToCart('masala Chest broast',400)">
+          Add to Cart
+        </button>
+    </div>
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Masala Leg Broast</h4>
+      </div>
+      <button class="price-btn" onclick="addToCart('masala leg Broast',220)">
+          Add to Cart
+        </button>
+    </div>
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Leg Broast</h4>
+      </div>
+      <button class="price-btn" onclick="addToCart('leg broast',220)">
+          Add to Cart
+        </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Full Family Broast</h4>
+      </div>
+      <button class="price-btn" onclick="addToCart('full fmily broast',220)">
+          Add to Cart
+        </button>
+    </div>
+
+
+    <h2>Burgers / Zinger Burgers</h2>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Chicken Burger</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Jumbo Chicken Burger</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Beef Burger</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Jumbo Beef Burger</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <h2>Sandwiches</h2>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Malai Club Sandwich</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Club Sandwich</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <h2>Paratha</h2>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Masala Cheese Paratha</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+    <h2>Rolls</h2>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Man-O-Salwa Special Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Chicken Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Chicken Chatni Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Chicken Jumbo Cheese Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <h2>Rolls with Cheese</h2>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Man-O-Salwa Special Cheese Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Chicken Cheese Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Chicken Chatni Cheese Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Fresh Kebab Cheese Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Seekh Kebab Mayo Roll</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+    <h2>Ice Cream & Falooda</h2>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>2 Scoop Ice Cream</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Special Dry Fruits Falooda</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+
+    <h2>Pasta</h2>
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Special Dry Fruits Falooda</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+    <div class="menu-item">
+      <div class="menu-left">
+        <h4>Lasagna</h4>
+      </div>
+      <button class="price-btn add-cart" data-name="Chest Broast" data-price="220">
+        Add to Cart
+      </button>
+    </div>
+    <br>
+    <footer>
+      &copy; 2025 Mano SALWA. All rights reserved.
+    </footer>
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+    }
+    </script>
+    <script>
+      function getCart() {
+        return JSON.parse(localStorage.getItem("cart")) || [];
+      }
+
+      function addToCart(name, price) {
+        let cart = getCart();
+
+        let item = cart.find(i => i.name === name);
+
+        if (item) {
+          item.qty += 1;
+        } else {
+          cart.push({
+            name: name,
+            price: price,
+            qty: 1
+          });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+      }
+
+      function updateCartCount() {
+        let cart = getCart();
+        let count = 0;
+
+        cart.forEach(item => count += item.qty);
+
+        const badge = document.getElementById("cartCount");
+        badge.innerText = count;
+        badge.style.display = count > 0 ? "inline-block" : "none";
+      }
+
+      function openCart() {
+        window.location.href = "cart.html";
+      }
+
+      // page load par sirf count read karo
+      updateCartCount();
+    </script>
+    
+
+</body>
+
+</html>

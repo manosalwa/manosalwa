@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <title>Mano SALWA - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="ICON" href="images/log.webp">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+<body oncontextmenu="return false;">
+
+  <header>
+
+    <div id="hu">
+
+      <a href="images/log.webp" target="_blank">
+        <img src="images/log.webp" alt="Mano SALWA Logo" class="logo">
+      </a>
+
+      
+      <!-- HAMBURGER ICON -->
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <nav id="navMenu">
+        <ul>
+          <div class="cart-box" onclick="openCart()">
+  🛒 <span id="cartCount">0</span>
+</div>
+          <li><a href="index.html" class="hume">Home</a></li>
+          <li><a href="about.html" class="hume">About Us</a></li>
+          <li><a href="menu.html" class="hume">Menu</a></li>
+          <li><a href="contact.html" class="hume">Contact</a></li>
+          <li><a href="delivery.html">Delivery</a></li>
+        </ul>
+      </nav>
+
+    </div>
+    
+    <img src="images/ayan.webp" class="hye">
+    <div class="hero animate zoom-in ">
+      <div>
+        <div id="au">
+          <div class="phone-box">
+          <i class="fa-solid fa-phone"></i>
+          <span>+92 313 2576885</span>
+        </div>
+        <div class="phone-box1">
+          <i class="fa-brands fa-tiktok"></i>
+          <span>tiktok.com/@manosalwafoods</span>
+        </div>
+        <div class="phone-box2">
+          <span>24/7 Service</span>
+        </div>
+        </div>
+        <h1>Welcome to Mano SALWA</h1>
+        <p>Your local BBQ & Ice Cream Paradise in Korangi!</p>
+        <a href="menu.html" target="_blank" id="raza">View Menu</a>
+      </div>
+    </div>
+  </header>
+  <section class="about">
+    <div class="about-grid">
+
+      <div class="about-images animate fade-left">
+        <img src="images/chef.webp" alt="Chef cooking">
+        <img src="images/food.webp" alt="Food cooking" class="ahy">
+      </div>
+
+      <div class="about-text animate fade-right">
+        <h3>About</h3>
+        <h2>MAN-O-SALWA</h2>
+
+        <p>
+          A small river named Duden flows by their place and supplies it with the
+          necessary things. Fresh BBQ and ice cream made with care.
+        </p>
+
+        <p class="time">Mon to Sun 8:00 AM to 9:00 PM</p>
+
+        <p class="phone">+92 313 2576885</p>
+      </div>
+
+    </div>
+  </section>
+  <section class="stats">
+    <div class="stats-wrap">
+
+      <div class="stat animate">
+        <h2 class="count" data-target="18">0</h2>
+        <p>Years of Experience</p>
+      </div>
+
+      <div class="stat animate">
+        <h2 class="count" data-target="50">0</h2>
+        <p>Menus Dish</p>
+      </div>
+
+      <div class="stat animate">
+        <h2 class="count" data-target="50">0</h2>
+        <p>Staffs</p>
+      </div>
+
+      <div class="stat animate">
+        <h2 >100k</h2>
+
+        <p>Happy Customers</p>
+      </div>
+
+    </div>
+  </section>
+  <section class="services">
+    <div class="services-wrap">
+
+      <div class="services-title">
+        <h3>Services</h3>
+        <h2>Catering Services</h2>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-box animate">
+          <i class="fa-solid fa-cake-candles"></i>
+          <h4>Birthday Party</h4>
+          <p>
+            Even the all powerful Pointing has no control about the blind texts.
+          </p>
+        </div>
+
+        <div class="service-box animate">
+          <i class="fa-solid fa-utensils"></i>
+          <h4>Dine in</h4>
+          <p>
+            Even the all powerful Pointing has no control about the blind texts.
+          </p>
+        </div>
+
+        <div class="service-box animate">
+          <i class="fa-solid fa-bell-concierge"></i>
+          <h4>Wedding Party</h4>
+          <p>
+            Even the all powerful Pointing has no control about the blind texts.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+  <section class="menu-section">
+    <div class="menu-title">
+      <h3>Specialities</h3>
+      <a href="menu.html" class="aa"><h2>Our Menu</h2></a>
+    </div>
+    </section>
+  <section class="reservation">
+
+    <form id="reservationForm" class="animate zoom-in">
+
+      <input type="text" id="r_name" placeholder="Your Name">
+      <input type="email" id="r_email" placeholder="Your Email">
+
+      <input type="tel" id="r_phone" placeholder="Phone">
+      <input type="date" id="r_date">
+
+      <input type="time" id="r_time">
+      <select id="r_person">
+        <option value="">Person</option>
+        <option>1 Person</option>
+        <option>2 Persons</option>
+        <option>3 Persons</option>
+        <option>4 Persons</option>
+        <option>5+ Persons</option>
+      </select>
+
+      <button type="submit">Make a Reservation</button>
+    </form>
+  </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Mano SALWA. All rights reserved.</p>
+  </footer>
+  <script>
+    /* ================= MOBILE MENU ================= */
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    if (menuToggle && navMenu) {
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+    }
+
+    /* ================= SCROLL ANIMATION ================= */
+    const animatedItems = document.querySelectorAll(".animate");
+
+    const animationObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            animationObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    animatedItems.forEach(item => animationObserver.observe(item));
+
+    /* ================= COUNTER FIX ================= */
+    const counters = document.querySelectorAll(".count");
+
+    const runCounter = counter => {
+      const target = Number(counter.dataset.target);
+
+      if (!target || isNaN(target)) {
+        counter.innerText = "0";
+        return;
+      }
+
+      let current = 0;
+      const step = Math.ceil(target / 80);
+
+      const update = () => {
+        current += step;
+        if (current < target) {
+          counter.innerText = current;
+          requestAnimationFrame(update);
+        } else {
+          counter.innerText = target;
+        }
+      };
+
+      update();
+    };
+
+    const counterObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target);
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    counters.forEach(counter => counterObserver.observe(counter));
+
+    /* ================= RESERVATION FORM ================= */
+    const reservationForm = document.getElementById("reservationForm");
+
+    if (reservationForm) {
+      reservationForm.addEventListener("submit", e => {
+        e.preventDefault();
+
+        const name = document.getElementById("r_name").value.trim();
+        const email = document.getElementById("r_email").value.trim();
+        const phone = document.getElementById("r_phone").value.trim();
+        const date = document.getElementById("r_date").value;
+        const time = document.getElementById("r_time").value;
+        const person = document.getElementById("r_person").value;
+
+        if (name.length < 3) {
+          alert("Enter valid name");
+          return;
+        }
+
+        if (phone.length < 10) {
+          alert("Enter valid phone");
+          return;
+        }
+
+        if (!date || !time || !person) {
+          alert("Complete reservation details");
+          return;
+        }
+
+        const whatsappNumber = "923132576885";
+
+        const message =
+          `NEW TABLE RESERVATION
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Date: ${date}
+Time: ${time}
+Persons: ${person}`;
+
+        const url =
+          "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(message);
+
+        window.open(url, "_blank");
+        reservationForm.reset();
+      });
+    }
+
+  </script>
+<script>
+  document.querySelectorAll(".order-link").forEach(link => {
+    link.addEventListener("click", function () {
+      localStorage.setItem("checkout_item", this.dataset.name);
+      localStorage.setItem("checkout_price", this.dataset.price);
+    });
+  });
+</script>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const cartCount = document.getElementById("cartCount");
+
+function updateCartCount(){
+  let count = 0;
+  cart.forEach(i => count += i.qty);
+  cartCount.innerText = count;
+}
+
+updateCartCount();
+
+document.querySelectorAll(".add-cart").forEach(btn => {
+  btn.addEventListener("click", () => {
+    let name = btn.dataset.name;
+    let price = Number(btn.dataset.price);
+
+    let found = cart.find(item => item.name === name);
+
+    if(found){
+      found.qty += 1;
+    } else {
+      cart.push({ name, price, qty: 1});
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+  });
+});
+
+function openCart(){
+  window.location.href = "cart.html";
+}
+</script>
+
+</body>
+
+</html>

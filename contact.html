@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  <title>Mano SALWA - Contact Us</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="ICON" href="images/log.webp">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body oncontextmenu="return false;">
+
+  <header>
+    <div class="logo-nav-container">
+      <img src="images/log.webp" alt="Mano SALWA Logo" class="logo">
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <nav id="navMenu">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" target="_blank">About Us</a></li>
+          <li><a href="menu.html" target="_blank">Menu</a></li>
+          <li><a href="contact.html" target="_blank">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="contact-info animate fade-left">
+      <h1>Contact Us</h1>
+      <div class="heade">
+      <p><strong>Phone:</strong> +92 313 2576885</p>
+      <p><strong>Address:</strong> Karachi, Korangi No. 6 Market</p></div>
+      <div class="map">
+        <iframe src="https://maps.google.com/maps?q=Karachi%20Korangi%20No.%206%20Market&amp;z=15&amp;output=embed" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+<section class="contact-form animate fade-right">
+      <h2>Send Us a Message</h2>
+      <form id="contactForm" action="#" method="post">
+        <input type="text" id="name" name="name" placeholder="Your Name">
+        <input type="email" id="email" name="email" placeholder="Your Email">
+        <textarea id="message" name="message" placeholder="Your Message"></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mano SALWA. All rights reserved.</p>
+  </footer>
+  <script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const message = document.getElementById("message").value.trim();
+
+  // BASIC CHECK
+  if (name.length < 3) {
+    alert("Please enter a valid name");
+    return;
+  }
+
+  if (message.length < 15) {
+    alert("Message must be at least 15 characters");
+    return;
+  }
+
+  // BLOCK COMMON USELESS MESSAGES
+  const blockedWords = ["hi", "hello", "test", "ok", "hey"];
+  if (blockedWords.includes(message.toLowerCase())) {
+    alert("Please write a proper message");
+    return;
+  }
+
+  // BLOCK ONLY NUMBERS OR SYMBOLS
+  if (!/[a-zA-Z]/.test(message)) {
+    alert("Message must contain real words");
+    return;
+  }
+
+  const whatsappNumber = "923132576885"; // apna number
+
+  const whatsappMessage =
+`NEW CONTACT MESSAGE
+Name: ${name}
+Email: ${email}
+Message: ${message}`;
+
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber + "?text=" + encodeURIComponent(whatsappMessage);
+
+  window.open(whatsappURL, "_blank");
+  document.getElementById("contactForm").reset();
+});
+</script>
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
+});
+</script>
+<script>
+const animatedItems = document.querySelectorAll(".animate");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+animatedItems.forEach(item => observer.observe(item));
+</script>
+
+
+
+</body>
+</html>

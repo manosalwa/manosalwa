@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="no-referrer">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<title>Checkout</title>
+
+<link rel="icon" href="../images/log.webp">
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("YOUR_PUBLIC_KEY");
+  })();
+</script>
+
+  <style>
+    * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #f3f3f3;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkout-container {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.checkout-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #500c0c;
+}
+
+.summary {
+  background: #fafafa;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.summary p {
+  font-size: 15px;
+  margin: 8px 0;
+}
+
+.summary hr {
+  margin: 15px 0;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background: #500c0c;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .checkout-container {
+    margin: 20px;
+    padding: 22px;
+  }
+
+  .summary p {
+    font-size: 14px;
+  }
+}
+.Ayan{
+  display: block;
+}
+  </style>
+</head>
+<body>
+
+<div class="checkout-container">
+  <h2>Checkout</h2>
+
+  <div class="summary">
+    <p><strong>Name:</strong> <span id="cName"></span></p>
+    <p><strong>Phone:</strong> <span id="cPhone"></span></p>
+    <p><strong>Address:</strong> <span id="cAddress"></span></p>
+    <hr>
+    <p><strong class="Ayan">Item:</strong> <span id="checkoutItem"></span></p>
+    <p><strong>Total Amount:</strong> Rs. <span id="checkoutPrice"></span></p>
+    <hr>
+  </div>
+
+ <button onclick="placeOrder()">Place Order</button>
+
+<script>
+function placeOrder() {
+
+  // EXACT checkout data
+  const name = document.getElementById("cName").innerText;
+  const phone = document.getElementById("cPhone").innerText;
+  const address = document.getElementById("cAddress").innerText;
+  const item = document.getElementById("checkoutItem").innerText;
+  const total = document.getElementById("checkoutPrice").innerText;
+
+  // ADMIN WHATSAPP NUMBER (without +)
+  const adminNumber = "923132576885";
+
+  // EXACT MESSAGE
+  const message =
+`🛒 NEW ORDER
+Name: ${name}
+Phone: ${phone}
+Address: ${address}
+Item: ${item}
+Total: Rs ${total}`;
+
+  // OPEN WHATSAPP CHAT
+  const url =
+    "https://wa.me/" + adminNumber +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+
+  // optional
+  localStorage.clear();
+}
+</script>
+
+
+
+<script>
+  const animatedItems = document.querySelectorAll(".animate");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  animatedItems.forEach((item) => observer.observe(item));
+</script>
+
+<script>
+  // User details
+  document.getElementById("cName").innerText =
+    localStorage.getItem("name") || "";
+
+  document.getElementById("cPhone").innerText =
+    localStorage.getItem("phone") || "";
+
+  document.getElementById("cAddress").innerText =
+    localStorage.getItem("address") || "";
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let itemsText = "";
+let total = 0;
+
+cart.forEach(item => {
+  itemsText += `${item.name} x ${item.qty}, `;
+  total += item.price * item.qty;
+});
+
+itemsText = itemsText.replace(/, $/, "");
+
+document.getElementById("checkoutItem").innerText =
+  itemsText || "—";
+
+document.getElementById("checkoutPrice").innerText =
+  total || 0;
+
+</script>
+
+
+</body>
+</html>
